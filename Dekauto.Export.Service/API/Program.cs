@@ -1,3 +1,6 @@
+using Dekauto.Export.Service.Domain.Interfaces;
+using Dekauto.Export.Service.Domain.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<IStudentsService, StudentsService>();
 
 var app = builder.Build();
 
