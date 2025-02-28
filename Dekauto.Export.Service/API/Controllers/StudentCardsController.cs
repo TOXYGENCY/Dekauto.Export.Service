@@ -32,5 +32,24 @@ namespace Dekauto.Export.Service.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpPost("students")]
+        public async Task<IActionResult> ExportStudents([FromBody] List<Student> students)
+        {
+            try
+            {
+                var stream = _studentsService.ConvertStudentsToExcel(students);
+
+                string fileName = $"Primer";
+                return File(stream, "application/zip", fileName);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }
