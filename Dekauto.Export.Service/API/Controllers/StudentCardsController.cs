@@ -11,10 +11,10 @@ namespace Dekauto.Export.Service.API.Controllers
         private readonly IStudentsService _studentsService;
         public StudentCardsController(IStudentsService studentsService) 
         {
-            _studentsService = studentsService;
+            _studentsService = studentsService??throw new ArgumentNullException();
         }
         [HttpPost("student")]
-        public async Task<IActionResult> Get([FromBody] Student student) 
+        public async Task<IActionResult> ExportStudent([FromBody] Student student) 
         {
             try
             {
