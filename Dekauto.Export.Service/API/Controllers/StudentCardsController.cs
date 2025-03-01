@@ -18,10 +18,10 @@ namespace Dekauto.Export.Service.API.Controllers
         {
             try
             {
-                var stream = await _studentsService.ConvertStudentToExcel(student);
+                var stream = _studentsService.ConvertStudentToExcel(student);
 
                 string fileName = $"{student.Name} {student.Surname} {student.Pathronymic}";
-                return Ok(File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName));
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
             }
             catch (ArgumentNullException ex)
             {
@@ -31,7 +31,7 @@ namespace Dekauto.Export.Service.API.Controllers
             {
                 return NotFound($"{ex.Message} {ex.FileName}");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(500, "Неизвестная ошибка, обратитесь к администратору");
             }
@@ -41,10 +41,10 @@ namespace Dekauto.Export.Service.API.Controllers
         {
             try
             {
-                var stream = await _studentsService.ConvertStudentsToExcel(students);
+                var stream = _studentsService.ConvertStudentsToExcel(students);
 
                 string fileName = $"Primer";
-                return Ok(File(stream, "application/zip", fileName));
+                return File(stream, "application/zip", fileName);
             }
             catch (ArgumentNullException ex)
             {
