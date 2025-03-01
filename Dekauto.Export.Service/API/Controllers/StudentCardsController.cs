@@ -18,18 +18,22 @@ namespace Dekauto.Export.Service.API.Controllers
         {
             try
             {
-                var stream = _studentsService.ConvertStudentToExcel(student);
+                var stream = await _studentsService.ConvertStudentToExcel(student);
 
                 string fileName = $"{student.Name} {student.Surname} {student.Pathronymic}";
-                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+                return Ok(File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName));
             }
             catch (ArgumentNullException ex)
             {
                 return BadRequest(ex.Message);
             }
+            catch (FileNotFoundException ex) 
+            {
+                return NotFound($"{ex.Message} {ex.FileName}");
+            }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return StatusCode(500, "Неизвестная ошибка, обратитесь к администратору");
             }
         }
         [HttpPost("students")]
@@ -37,18 +41,26 @@ namespace Dekauto.Export.Service.API.Controllers
         {
             try
             {
-                var stream = _studentsService.ConvertStudentsToExcel(students);
+                var stream = await _studentsService.ConvertStudentsToExcel(students);
 
                 string fileName = $"Primer";
-                return File(stream, "application/zip", fileName);
+                return Ok(File(stream, "application/zip", fileName));
             }
             catch (ArgumentNullException ex)
             {
                 return BadRequest(ex.Message);
             }
-            catch (Exception ex)
+            catch (FileNotFoundException ex)
             {
-                return StatusCode(500, ex.Message);
+                return NotFound($"{ex.Message} {ex.FileName}");
+            }
+            catch (InvalidOperationException ex) 
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Неизвестная ошибка, обратитесь к администратору");
             }
         }
     }

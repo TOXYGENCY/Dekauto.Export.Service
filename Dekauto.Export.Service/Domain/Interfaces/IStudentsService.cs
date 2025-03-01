@@ -4,8 +4,8 @@ namespace Dekauto.Export.Service.Domain.Interfaces
 {
     public interface IStudentsService
     {
-        MemoryStream ConvertStudentToExcel(Student student);
-        MemoryStream ConvertStudentsToExcel(List<Student> students);
+        Task<MemoryStream> ConvertStudentToExcel(Student student);
+        Task<MemoryStream> ConvertStudentsToExcel(List<Student> students);
 
     }
 }
