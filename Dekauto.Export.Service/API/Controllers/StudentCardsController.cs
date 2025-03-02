@@ -25,11 +25,15 @@ namespace Dekauto.Export.Service.API.Controllers
             }
             catch (ArgumentNullException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest($"Ошибка объекта Студент: {ex.Message}");
             }
             catch (FileNotFoundException ex) 
             {
                 return NotFound($"{ex.Message} {ex.FileName}");
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
             }
             catch (Exception)
             {
