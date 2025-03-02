@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Decauto.Export.Tests
+namespace Dekauto.Export.Tests
 {
     [TestClass]
     public class TestStudents

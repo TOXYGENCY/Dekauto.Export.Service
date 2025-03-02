@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dekauto.Export.Service", "Dekauto.Export.Service\Dekauto.Export.Service.csproj", "{5852355D-C82B-4A0D-8B6D-55EBBC70D39F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decauto.Export.Tests", "Decauto.Export.Tests\Decauto.Export.Tests.csproj", "{DA3E5443-C575-45D2-9BD8-383DE2E258A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dekauto.Export.Tests", "Decauto.Export.Tests\Dekauto.Export.Tests.csproj", "{DA3E5443-C575-45D2-9BD8-383DE2E258A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

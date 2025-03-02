@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
-namespace Decauto.Export.Tests
+namespace Dekauto.Export.Tests
 {
     [TestClass]
     public class TestStudent
