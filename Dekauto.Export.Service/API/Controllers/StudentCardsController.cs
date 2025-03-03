@@ -1,6 +1,7 @@
 ﻿using Dekauto.Export.Service.Domain.Entities;
 using Dekauto.Export.Service.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
 
 namespace Dekauto.Export.Service.API.Controllers
 {
@@ -9,10 +10,24 @@ namespace Dekauto.Export.Service.API.Controllers
     public class StudentCardsController : ControllerBase
     {
         private readonly IStudentsService _studentsService;
+        private string _defaultLatFileName = "exported_student_card";
+
         public StudentCardsController(IStudentsService studentsService) 
         {
             _studentsService = studentsService??throw new ArgumentNullException();
         }
+
+        private void _setHeaderFileNames(string fileName, string fileNameStar)
+        {
+            // Проблема: передается только сам файл, а его название автомат. вписывается в заголовки, но без поддержки кириллицы.
+            // Формируем http-заголовок с поддержкой UTF-8 (для поддержки кириллицы в http-заголовках)
+            var encodedFileName = Uri.EscapeDataString(fileNameStar);
+            Response.Headers.Append(
+                "Content-Disposition",
+                $"attachment; filename=\"{fileName}.xlsx\"; filename*=UTF-8''{encodedFileName}"
+            );
+        }
+
         [HttpPost("student")]
         public async Task<IActionResult> ExportStudent([FromBody] Student student) 
         {
@@ -20,8 +35,13 @@ namespace Dekauto.Export.Service.API.Controllers
             {
                 var stream = _studentsService.ConvertStudentToExcel(student);
 
+                // INFO: данные в имени файла не должны содержать спецсимволы!
                 string fileName = $"{student.Name} {student.Surname} {student.Pathronymic}";
-                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+
+                _setHeaderFileNames(_defaultLatFileName, fileName);
+
+                // Возвращаем файл БЕЗ указания имени в третьем параметре
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
             catch (ArgumentNullException ex)
             {
@@ -47,8 +67,10 @@ namespace Dekauto.Export.Service.API.Controllers
             {
                 var stream = _studentsService.ConvertStudentsToExcel(students);
 
+                // INFO: данные в имени файла не должны содержать спецсимволы
                 string fileName = $"Primer";
-                return File(stream, "application/zip", fileName);
+                _setHeaderFileNames(_defaultLatFileName, fileName);
+                return File(stream, "application/zip");
             }
             catch (ArgumentNullException ex)
             {
