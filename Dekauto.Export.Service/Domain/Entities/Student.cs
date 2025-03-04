@@ -16,8 +16,7 @@
         public string? Faculty { get; set; } // Факультет
         public string? CourseOfTraining { get; set; } // Направление подготовки
         public string? Course { get; set; } // Направленность (специализация)
-        public string? NumberOfContract { get; set; } // Номер зачетной книжки
-        public string? PersonalRecord { get; set; } // Номер личного дела
+        public string? GradeBook { get; set; } // Номер зачетной книжки
         public string? PassportSerial { get; set; } // Серия паспорта
         public string? PassportNumber { get; set; } // Номер паспорта
         public string? PassportIssuancePlace { get; set; } // Место выдачи паспорта

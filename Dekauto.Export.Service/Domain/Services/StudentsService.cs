@@ -20,7 +20,7 @@ namespace Dekauto.Export.Service.Domain.Services
             {
                 foreach (var student in students)
                 {
-                    var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Шаблон.xlsx"); //Путь шаблона 
+                    var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "УЧЕБНАЯ_КАРТОЧКА_студента.xlsx"); //Путь шаблона 
 
                     if (!File.Exists(templatePath))
                     {
@@ -36,9 +36,15 @@ namespace Dekauto.Export.Service.Domain.Services
 
                         var worksheet = package.Workbook.Worksheets[0];//Выбираем первый лист
 
-                        worksheet.Cells["A2"].Value = student.Name;
-                        worksheet.Cells["B2"].Value = student.Surname;
-                        worksheet.Cells["C2"].Value = student.Pathronymic;
+                        worksheet.Cells["B4"].Value = student.Name;
+                        worksheet.Cells["B3"].Value = student.Surname;
+                        worksheet.Cells["B5"].Value = student.Pathronymic;
+                        worksheet.Cells["G3"].Value = student.GradeBook;
+                        worksheet.Cells["G4"].Value = student.GradeBook;
+                        if (student.Gender == true) worksheet.Cells["B6"].Value = "М";
+                        else worksheet.Cells["B6"].Value = "Ж";
+                        worksheet.Cells["E6"].Value = student.BirthdayDate;
+                        worksheet.Cells["A7"].Value = student.BirthdayPlace;
 
                         var entry = archive.CreateEntry($"{student.Name} {student.Surname} {student.Pathronymic}.xlsx");
                         using (var entryStream = entry.Open())
@@ -59,7 +65,7 @@ namespace Dekauto.Export.Service.Domain.Services
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             if (student == null) throw new ArgumentNullException(nameof(student));
 
-            var templatePath = Path.Combine(Directory.GetCurrentDirectory(),"Шаблон.xlsx"); //Путь шаблона
+            var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "УЧЕБНАЯ_КАРТОЧКА_студента.xlsx"); //Путь шаблона
 
             if (!File.Exists(templatePath))
             {
@@ -77,10 +83,16 @@ namespace Dekauto.Export.Service.Domain.Services
 
                 var worksheet = package.Workbook.Worksheets[0];//Выбираем первый лист
 
-                worksheet.Cells["A2"].Value = student.Name;
-                worksheet.Cells["B2"].Value = student.Surname;
-                worksheet.Cells["C2"].Value = student.Pathronymic;
-                
+                worksheet.Cells["B4"].Value = student.Name;
+                worksheet.Cells["B3"].Value = student.Surname;
+                worksheet.Cells["B5"].Value = student.Pathronymic;
+                worksheet.Cells["G3"].Value = student.GradeBook;
+                worksheet.Cells["G4"].Value = student.GradeBook;
+                if (student.Gender == true) worksheet.Cells["B6"].Value = "М";
+                else worksheet.Cells["B6"].Value = "Ж";
+                worksheet.Cells["E6"].Value = student.BirthdayDate;
+                worksheet.Cells["A7"].Value = student.BirthdayPlace;
+
                 package.SaveAs(stream);//Сохраняем файл
             }
             stream.Position = 0;//Сбрасываем позицию
