@@ -16,7 +16,7 @@
         public string? EnrollementOrderNum { get; set; } // Номер приказа о зачислении
         public string? Faculty { get; set; } // Факультет
         public string? CourseOfTraining { get; set; } // Направление подготовки
-        public string? Course { get; set; } // Курс
+        public string? Course { get; set; } // Специальность
         public string? NumberOfContract { get; set; } // Номер зачетной книжки
         public string? PersonalRecord { get; set; } // Номер личного дела
         public string? PassportSerial { get; set; } // Серия паспорта
