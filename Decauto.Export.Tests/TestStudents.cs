@@ -33,7 +33,7 @@ namespace Dekauto.Export.Tests
             {
                 new Student
                 { 
-                    Id = Guid.NewGuid(),
+                    
                     Name = "Иван",
                     Surname = "Иванов",
                     Pathronymic = "Иванович" 
@@ -64,7 +64,7 @@ namespace Dekauto.Export.Tests
             {
                 new Student
                 {
-                    Id = Guid.NewGuid(),
+                    
                     Name = "Иван",
                     Surname = "Иванов",
                     Pathronymic = "Иванович"
@@ -90,7 +90,7 @@ namespace Dekauto.Export.Tests
             {
                 new Student
                 {
-                    Id = Guid.NewGuid(),
+                    
                     Name = "Иван",
                     Surname = "Иванов",
                     Pathronymic = "Иванович"
@@ -116,7 +116,7 @@ namespace Dekauto.Export.Tests
             {
                 new Student
                 {
-                    Id = Guid.NewGuid(),
+                    
                     Name = "Иван",
                     Surname = "Иванов",
                     Pathronymic = "Иванович"
@@ -142,7 +142,7 @@ namespace Dekauto.Export.Tests
             {
                 new Student
                 {
-                    Id = Guid.NewGuid(),
+                    
                     Name = "Иван",
                     Surname = "Иванов",
                     Pathronymic = "Иванович"

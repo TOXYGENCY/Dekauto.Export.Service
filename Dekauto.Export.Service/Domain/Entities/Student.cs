@@ -2,7 +2,6 @@
 {
     public class Student
     {
-        public Guid Id { get; set; } // Идентификатор
         
         public string? Name { get; set; } // Имя
         public string? Surname { get; set; } // Фамилия

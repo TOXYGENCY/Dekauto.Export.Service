@@ -27,7 +27,7 @@ namespace Dekauto.Export.Tests
             //Arrange
             var student = new Student 
             {
-                Id = Guid.NewGuid(), 
+                 
                 Name = "Иван",
                 Surname = "Иванов",
                 Pathronymic = "Иванович",
@@ -55,7 +55,7 @@ namespace Dekauto.Export.Tests
             //Arrange
             var student = new Student
             {
-                Id = Guid.NewGuid(),
+                
                 Name = "Иван",
                 Surname = "Иванов",
                 Pathronymic = "Иванович",
@@ -78,7 +78,7 @@ namespace Dekauto.Export.Tests
             //Arrange
             var student = new Student
             {
-                Id = Guid.NewGuid(),
+                
                 Name = "Иван",
                 Surname = "Иванов",
                 Pathronymic = "Иванович",
@@ -101,7 +101,7 @@ namespace Dekauto.Export.Tests
             //Arrange
             var student = new Student
             {
-                Id = Guid.NewGuid(),
+                
                 Name = "Иван",
                 Surname = "Иванов",
                 Pathronymic = "Иванович",
@@ -124,7 +124,7 @@ namespace Dekauto.Export.Tests
             //Arrange
             var student = new Student
             {
-                Id = Guid.NewGuid(),
+                
                 Name = "Иван",
                 Surname = "Иванов",
                 Pathronymic = "Иванович",
