@@ -8,6 +8,14 @@ namespace Dekauto.Export.Service.Domain.Services
 {
     public class StudentsService: IStudentsService
     {
+        private IConfiguration _configuration;
+        private string exportCardName;
+        public StudentsService (IConfiguration configuration) 
+        {
+            _configuration = configuration;
+            exportCardName = _configuration.GetValue<string>("ExportCardName")??throw new ArgumentNullException(nameof(exportCardName));
+
+        }
         public MemoryStream ConvertStudentsToExcel(List<Student> students)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -20,7 +28,7 @@ namespace Dekauto.Export.Service.Domain.Services
             {
                 foreach (var student in students)
                 {
-                    var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "УЧЕБНАЯ_КАРТОЧКА_студента.xlsx"); //Путь шаблона 
+                    var templatePath = Path.Combine(Directory.GetCurrentDirectory(), exportCardName); //Путь шаблона 
 
                     if (!File.Exists(templatePath))
                     {
@@ -154,7 +162,7 @@ namespace Dekauto.Export.Service.Domain.Services
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             if (student == null) throw new ArgumentNullException(nameof(student));
 
-            var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "УЧЕБНАЯ_КАРТОЧКА_студента.xlsx"); //Путь шаблона
+            var templatePath = Path.Combine(Directory.GetCurrentDirectory(), exportCardName); //Путь шаблона
 
             if (!File.Exists(templatePath))
             {
