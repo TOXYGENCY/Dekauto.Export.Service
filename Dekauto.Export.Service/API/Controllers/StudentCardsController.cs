@@ -68,7 +68,7 @@ namespace Dekauto.Export.Service.API.Controllers
                 var stream = _studentsService.ConvertStudentsToExcel(students);
 
                 // INFO: данные в имени файла не должны содержать спецсимволы
-                string fileName = $"Primer";
+                string fileName = students.First().GroupName??throw new ArgumentNullException(nameof(fileName));
                 _setHeaderFileNames(_defaultLatFileName, fileName);
                 return File(stream, "application/zip");
             }
