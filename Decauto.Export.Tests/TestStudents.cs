@@ -1,4 +1,5 @@
-﻿using Dekauto.Export.Service.API.Controllers;
+﻿using Castle.Components.DictionaryAdapter.Xml;
+using Dekauto.Export.Service.API.Controllers;
 using Dekauto.Export.Service.Domain.Entities;
 using Dekauto.Export.Service.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -43,18 +44,23 @@ namespace Dekauto.Export.Tests
             };
             var memoryStream = new MemoryStream();
             _studentsService.Setup(s => s.ConvertStudentsToExcel(It.IsAny<List<Student>>())).Returns(memoryStream);
+            _controller.ControllerContext = new ControllerContext 
+            {
+                HttpContext = new DefaultHttpContext()
+            };
 
             //Act
             var result = await _controller.ExportStudents(students);
 
             //Assert
             Assert.IsNotNull(result);
-            var fileResult = result as FileContentResult; // Приводим к FileResult
+            var fileResult = result as FileStreamResult; // Приводим к FileResult
             Assert.IsNotNull(fileResult, "Результат не является FileContentResult."); // Проверяем, что результат является FileResult
 
             Assert.AreEqual("application/zip", fileResult.ContentType); // Проверка типа контента
-            Assert.AreEqual(students.First().GroupName, fileResult.FileDownloadName); // Проверка имени файла
-            Assert.IsNotNull(fileResult.FileContents);
+            var fileNameHeader = _controller.Response.Headers["Content-Disposition"].ToString();
+            Assert.IsTrue(fileNameHeader.Contains($"filename*=UTF-8''{Uri.EscapeDataString("22ИТ")}"), fileNameHeader); 
+            Assert.IsNotNull(fileResult.FileStream);
 
         }
 

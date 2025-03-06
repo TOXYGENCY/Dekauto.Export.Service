@@ -33,19 +33,23 @@ namespace Dekauto.Export.Tests
                 Pathronymic = "Иванович",
             };
             _studentsService.Setup(s=>s.ConvertStudentToExcel(It.IsAny<Student>())).Returns(new MemoryStream());
+            _controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext()
+            };
 
             //Act
             var result = await _controller.ExportStudent(student);
 
             //Assert
             Assert.IsNotNull(result);
-            var fileResult = result as FileResult; // Приводим к FileResult
+            var fileResult = result as FileStreamResult; // Приводим к FileResult
             Assert.IsNotNull(fileResult); // Проверяем, что результат является FileResult
 
-            var fileStreamResult = fileResult as FileStreamResult;
-            Assert.AreEqual("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileStreamResult.ContentType); // Проверка типа контента
-            Assert.AreEqual($"{student.Name} {student.Surname} {student.Pathronymic}", fileStreamResult.FileDownloadName); // Проверка имени файла
-            Assert.IsNotNull(fileStreamResult.FileStream);
+            Assert.AreEqual("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileResult.ContentType); // Проверка типа контента
+            var fileNameHeader = _controller.Response.Headers["Content-Disposition"].ToString();
+            Assert.IsTrue(fileNameHeader.Contains($"filename*=UTF-8''{Uri.EscapeDataString("Иванов Иван Иванович")}"), fileNameHeader);
+            Assert.IsNotNull(fileResult.FileStream); 
 
         }
 

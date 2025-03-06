@@ -21,6 +21,10 @@ namespace Dekauto.Export.Service.API.Controllers
         {
             // Проблема: передается только сам файл, а его название автомат. вписывается в заголовки, но без поддержки кириллицы.
             // Формируем http-заголовок с поддержкой UTF-8 (для поддержки кириллицы в http-заголовках)
+            if (Response == null)
+            {
+                throw new InvalidOperationException("Response не инициализирован.");
+            }
             var encodedFileName = Uri.EscapeDataString(fileNameStar);
             Response.Headers.Append(
                 "Content-Disposition",
@@ -36,7 +40,7 @@ namespace Dekauto.Export.Service.API.Controllers
                 var stream = _studentsService.ConvertStudentToExcel(student);
 
                 // INFO: данные в имени файла не должны содержать спецсимволы!
-                string fileName = $"{student.Name} {student.Surname} {student.Pathronymic}";
+                string fileName = $"{student.Surname} {student.Name} {student.Pathronymic}";
 
                 _setHeaderFileNames(_defaultLatFileName, fileName);
 
