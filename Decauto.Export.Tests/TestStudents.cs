@@ -2,7 +2,9 @@
 using Dekauto.Export.Service.Domain.Entities;
 using Dekauto.Export.Service.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -33,26 +35,26 @@ namespace Dekauto.Export.Tests
             {
                 new Student
                 { 
-                    
                     Name = "Иван",
                     Surname = "Иванов",
-                    Pathronymic = "Иванович" 
+                    Pathronymic = "Иванович",
+                    GroupName = "22ИТ"
                 }
             };
-            _studentsService.Setup(s => s.ConvertStudentsToExcel(It.IsAny<List<Student>>())).Returns(new MemoryStream());
+            var memoryStream = new MemoryStream();
+            _studentsService.Setup(s => s.ConvertStudentsToExcel(It.IsAny<List<Student>>())).Returns(memoryStream);
 
             //Act
             var result = await _controller.ExportStudents(students);
 
             //Assert
             Assert.IsNotNull(result);
-            var fileResult = result as FileResult; // Приводим к FileResult
-            Assert.IsNotNull(fileResult); // Проверяем, что результат является FileResult
+            var fileResult = result as FileContentResult; // Приводим к FileResult
+            Assert.IsNotNull(fileResult, "Результат не является FileContentResult."); // Проверяем, что результат является FileResult
 
-            var fileStreamResult = fileResult as FileStreamResult;
-            Assert.AreEqual("application/zip", fileStreamResult.ContentType); // Проверка типа контента
-            Assert.AreEqual($"Primer", fileStreamResult.FileDownloadName); // Проверка имени файла
-            Assert.IsNotNull(fileStreamResult.FileStream);
+            Assert.AreEqual("application/zip", fileResult.ContentType); // Проверка типа контента
+            Assert.AreEqual(students.First().GroupName, fileResult.FileDownloadName); // Проверка имени файла
+            Assert.IsNotNull(fileResult.FileContents);
 
         }
 
@@ -116,10 +118,10 @@ namespace Dekauto.Export.Tests
             {
                 new Student
                 {
-                    
                     Name = "Иван",
                     Surname = "Иванов",
-                    Pathronymic = "Иванович"
+                    Pathronymic = "Иванович",
+                    GroupName = "22ИТ"
                 }
             };
             _studentsService.Setup(s => s.ConvertStudentsToExcel(It.IsAny<List<Student>>())).Throws(new InvalidOperationException());

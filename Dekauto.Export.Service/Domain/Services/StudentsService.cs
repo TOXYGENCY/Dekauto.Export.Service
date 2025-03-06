@@ -138,9 +138,9 @@ namespace Dekauto.Export.Service.Domain.Services
                         worksheet.Cells["J81"].Value = student.EducationFinishYear;
                         worksheet.Cells["I82"].Value = student.EducationTime;
                         worksheet.Cells["C84"].Value = student.EducationBase;
-                        worksheet.Cells["C85"].Value = student.EduRelationForm;
-                        worksheet.Cells["G85"].Value = student.EduRelationNum;
-                        worksheet.Cells["I85"].Value = student.EduRelationDate;
+                        worksheet.Cells["C85"].Value = student.EducationRelationForm;
+                        worksheet.Cells["G85"].Value = student.EducationRelationNum;
+                        worksheet.Cells["I85"].Value = student.EducationRelationDate;
 
 
                         var entry = archive.CreateEntry($"{student.Name} {student.Surname} {student.Pathronymic}.xlsx");
@@ -274,9 +274,9 @@ namespace Dekauto.Export.Service.Domain.Services
                 worksheet.Cells["J81"].Value = student.EducationFinishYear;
                 worksheet.Cells["I82"].Value = student.EducationTime;
                 worksheet.Cells["C84"].Value = student.EducationBase;
-                worksheet.Cells["C85"].Value = student.EduRelationForm;
-                worksheet.Cells["G85"].Value = student.EduRelationNum;
-                worksheet.Cells["I85"].Value = student.EduRelationDate;
+                worksheet.Cells["C85"].Value = student.EducationRelationForm;
+                worksheet.Cells["G85"].Value = student.EducationRelationNum;
+                worksheet.Cells["I85"].Value = student.EducationRelationDate;
 
                 package.SaveAs(stream);//Сохраняем файл
             }

@@ -73,9 +73,9 @@
         public short? EducationFinishYear { get; set; } // Год окончания образования +
         public short? EducationTime { get; set; } // Время обучения +
         public string? EducationBase { get; set; } // Основа обучения + 
-        public string? EduRelationForm { get; set; } // Форма отношений +
-        public string? EduRelationNum { get; set; } // Номер отношений с учебным заведением +
-        public DateTime? EduRelationDate { get; set; } // Дата начала отношений с учебным заведением +
+        public string? EducationRelationForm { get; set; } // Форма отношений +
+        public string? EducationRelationNum { get; set; } // Номер отношений с учебным заведением +
+        public DateTime? EducationRelationDate { get; set; } // Дата начала отношений с учебным заведением +
 
     }
 }
