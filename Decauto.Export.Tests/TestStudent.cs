@@ -32,7 +32,7 @@ namespace Dekauto.Export.Tests
                 Surname = "Иванов",
                 Pathronymic = "Иванович",
             };
-            _studentsService.Setup(s=>s.ConvertStudentToExcel(It.IsAny<Student>())).Returns(new MemoryStream());
+            _studentsService.Setup(s => s.ConvertStudentToExcel(It.IsAny<Student>())).ReturnsAsync(new MemoryStream());
             _controller.ControllerContext = new ControllerContext
             {
                 HttpContext = new DefaultHttpContext()

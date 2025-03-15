@@ -37,31 +37,17 @@ namespace Dekauto.Export.Service.API.Controllers
         {
             try
             {
-                var stream = _studentsService.ConvertStudentToExcel(student);
-
+                var stream = await _studentsService.ConvertStudentToExcel(student);
                 // INFO: данные в имени файла не должны содержать спецсимволы!
                 string fileName = $"{student.Surname} {student.Name} {student.Pathronymic}";
-
                 _setHeaderFileNames(_defaultLatFileName, fileName);
 
                 // Возвращаем файл БЕЗ указания имени в третьем параметре
                 return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             }
-            catch (ArgumentNullException ex)
+            catch (Exception ex) 
             {
-                return BadRequest($"Ошибка объекта Студент: {ex.Message}");
-            }
-            catch (FileNotFoundException ex) 
-            {
-                return NotFound($"{ex.Message} {ex.FileName}");
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Неизвестная ошибка, обратитесь к администратору");
+                return HandleException(ex);
             }
         }
         [HttpPost("students")]
@@ -69,28 +55,30 @@ namespace Dekauto.Export.Service.API.Controllers
         {
             try
             {
-                var stream = _studentsService.ConvertStudentsToExcel(students);
+                var stream = await _studentsService.ConvertStudentsToExcel(students);
 
                 // INFO: данные в имени файла не должны содержать спецсимволы
-                string fileName = students.First().GroupName??throw new ArgumentNullException(nameof(fileName));
+                string fileName = students.First().GroupName ?? throw new ArgumentNullException(nameof(fileName));
                 _setHeaderFileNames(_defaultLatFileName, fileName);
                 return File(stream, "application/zip");
             }
-            catch (ArgumentNullException ex)
+            catch (Exception ex) 
             {
-                return BadRequest(ex.Message);
+                return HandleException(ex);
             }
-            catch (FileNotFoundException ex)
+        }
+        private IActionResult HandleException(Exception ex) 
+        {
+            switch (ex) 
             {
-                return NotFound($"{ex.Message} {ex.FileName}");
-            }
-            catch (InvalidOperationException ex) 
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Неизвестная ошибка, обратитесь к администратору");
+                case ArgumentNullException argumentNullException:
+                    return BadRequest(argumentNullException.Message);
+                case FileNotFoundException fileNotFoundException:
+                    return NotFound($"{fileNotFoundException.Message} {fileNotFoundException.FileName}");
+                case InvalidOperationException invalidOperationException:
+                    return BadRequest(invalidOperationException.Message);
+                default:
+                    return StatusCode(500, "Неизвестная ошибка, обратитесь к администратору");
             }
         }
     }

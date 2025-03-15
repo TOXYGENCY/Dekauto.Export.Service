@@ -43,7 +43,7 @@ namespace Dekauto.Export.Tests
                 }
             };
             var memoryStream = new MemoryStream();
-            _studentsService.Setup(s => s.ConvertStudentsToExcel(It.IsAny<List<Student>>())).Returns(memoryStream);
+            _studentsService.Setup(s => s.ConvertStudentsToExcel(It.IsAny<List<Student>>())).ReturnsAsync(memoryStream);
             _controller.ControllerContext = new ControllerContext 
             {
                 HttpContext = new DefaultHttpContext()
