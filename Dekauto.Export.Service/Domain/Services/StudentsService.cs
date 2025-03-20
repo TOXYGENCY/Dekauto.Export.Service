@@ -39,7 +39,7 @@ namespace Dekauto.Export.Service.Domain.Services
                     {
                         FillExcel(student, package);
 
-                        var entry = archive.CreateEntry($"{student.Name} {student.Surname} {student.Pathronymic}.xlsx");
+                        var entry = archive.CreateEntry($"{student.Name} {student.Surname} {student.Patronymic}.xlsx");
                         using (var entryStream = entry.Open())
                         {
                             await package.SaveAsAsync(entryStream);//Сохраняем файл
@@ -87,7 +87,7 @@ namespace Dekauto.Export.Service.Domain.Services
             //Персональные данные
             worksheet.Cells["B4"].Value = student.Name;
             worksheet.Cells["B3"].Value = student.Surname;
-            worksheet.Cells["B5"].Value = student.Pathronymic;
+            worksheet.Cells["B5"].Value = student.Patronymic;
             worksheet.Cells["G3"].Value = student.GradeBook;
             worksheet.Cells["G4"].Value = student.GradeBook;
             if (student.Gender == true) worksheet.Cells["B6"].Value = "М";

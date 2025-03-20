@@ -39,7 +39,7 @@ namespace Dekauto.Export.Service.API.Controllers
             {
                 var stream = await _studentsService.ConvertStudentToExcel(student);
                 // INFO: данные в имени файла не должны содержать спецсимволы!
-                string fileName = $"{student.Surname} {student.Name} {student.Pathronymic}";
+                string fileName = $"{student.Surname} {student.Name} {student.Patronymic}";
                 _setHeaderFileNames(_defaultLatFileName, fileName);
 
                 // Возвращаем файл БЕЗ указания имени в третьем параметре

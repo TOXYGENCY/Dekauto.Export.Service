@@ -38,7 +38,7 @@ namespace Dekauto.Export.Tests
                 { 
                     Name = "Иван",
                     Surname = "Иванов",
-                    Pathronymic = "Иванович",
+                    Patronymic = "Иванович",
                     GroupName = "22ИТ"
                 }
             };
@@ -75,7 +75,7 @@ namespace Dekauto.Export.Tests
                     
                     Name = "Иван",
                     Surname = "Иванов",
-                    Pathronymic = "Иванович"
+                    Patronymic = "Иванович"
                 }
             };
             _studentsService.Setup(s => s.ConvertStudentsToExcel(It.IsAny<List<Student>>())).Throws(new ArgumentNullException());
@@ -101,7 +101,7 @@ namespace Dekauto.Export.Tests
                     
                     Name = "Иван",
                     Surname = "Иванов",
-                    Pathronymic = "Иванович"
+                    Patronymic = "Иванович"
                 }
             };
             _studentsService.Setup(s => s.ConvertStudentsToExcel(It.IsAny<List<Student>>())).Throws(new FileNotFoundException());
@@ -126,7 +126,7 @@ namespace Dekauto.Export.Tests
                 {
                     Name = "Иван",
                     Surname = "Иванов",
-                    Pathronymic = "Иванович",
+                    Patronymic = "Иванович",
                     GroupName = "22ИТ"
                 }
             };
@@ -153,7 +153,7 @@ namespace Dekauto.Export.Tests
                     
                     Name = "Иван",
                     Surname = "Иванов",
-                    Pathronymic = "Иванович"
+                    Patronymic = "Иванович"
                 }
             };
             _studentsService.Setup(s => s.ConvertStudentsToExcel(It.IsAny<List<Student>>())).Throws(new Exception());
