@@ -39,7 +39,7 @@ namespace Dekauto.Export.Service.Domain.Services
                     {
                         FillExcel(student, package);
 
-                        var entry = archive.CreateEntry($"{student.Name} {student.Surname} {student.Patronymic}.xlsx");
+                        var entry = archive.CreateEntry($"{student.Surname} {student.Name} {student.Patronymic}.xlsx");
                         using (var entryStream = entry.Open())
                         {
                             await package.SaveAsAsync(entryStream);//Сохраняем файл
