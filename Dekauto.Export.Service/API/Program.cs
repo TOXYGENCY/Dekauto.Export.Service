@@ -14,13 +14,19 @@ builder.Services.AddTransient<IStudentsService, StudentsService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+// Явно указываем порты (для Docker)
+app.Urls.Add("http://*:5505");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+} else
+{
+    app.Urls.Add("https://*:5506");
+    app.UseHttpsRedirection(); // без https редиректа в dev-версии
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

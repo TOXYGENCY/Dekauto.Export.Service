@@ -9,15 +9,15 @@ namespace Dekauto.Export.Service.API.Controllers
     [ApiController]
     public class StudentCardsController : ControllerBase
     {
-        private readonly IStudentsService _studentsService;
-        private string _defaultLatFileName = "exported_student_card";
+        private readonly IStudentsService studentsService;
+        private string defaultLatFileName = "exported_student_card";
 
         public StudentCardsController(IStudentsService studentsService) 
         {
-            _studentsService = studentsService??throw new ArgumentNullException();
+            this.studentsService = studentsService??throw new ArgumentNullException();
         }
 
-        private void _setHeaderFileNames(string fileName, string fileNameStar)
+        private void SetHeaderFileNames(string fileName, string fileNameStar)
         {
             // Проблема: передается только сам файл, а его название автомат. вписывается в заголовки, но без поддержки кириллицы.
             // Формируем http-заголовок с поддержкой UTF-8 (для поддержки кириллицы в http-заголовках)
@@ -37,10 +37,10 @@ namespace Dekauto.Export.Service.API.Controllers
         {
             try
             {
-                var stream = await _studentsService.ConvertStudentToExcel(student);
+                var stream = await studentsService.ConvertStudentToExcel(student);
                 // INFO: данные в имени файла не должны содержать спецсимволы!
                 string fileName = $"{student.Surname} {student.Name} {student.Patronymic}";
-                _setHeaderFileNames(_defaultLatFileName, fileName);
+                SetHeaderFileNames(defaultLatFileName, fileName);
 
                 // Возвращаем файл БЕЗ указания имени в третьем параметре
                 return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
@@ -55,11 +55,11 @@ namespace Dekauto.Export.Service.API.Controllers
         {
             try
             {
-                var stream = await _studentsService.ConvertStudentsToExcel(students);
+                var stream = await studentsService.ConvertStudentsToExcel(students);
 
                 // INFO: данные в имени файла не должны содержать спецсимволы
                 string fileName = students.First().GroupName ?? throw new ArgumentNullException(nameof(fileName));
-                _setHeaderFileNames(_defaultLatFileName, fileName);
+                SetHeaderFileNames(defaultLatFileName, fileName);
                 return File(stream, "application/zip");
             }
             catch (Exception ex) 
