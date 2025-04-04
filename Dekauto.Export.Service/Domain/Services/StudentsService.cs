@@ -120,16 +120,16 @@ namespace Dekauto.Export.Service.Domain.Services
             worksheet.Cells["J17"].Value = student.AddressRegistrationApartment;
 
             //Адрес проживания
-            worksheet.Cells["B19"].Value = student.AddressRegistrationIndex;
-            worksheet.Cells["G19"].Value = student.AddressRegistrationOblKrayAvtobl;
-            worksheet.Cells["B20"].Value = student.AddressRegistrationDistrict;
-            worksheet.Cells["E20"].Value = student.AddressRegistrationType;
-            worksheet.Cells["G20"].Value = student.AddressRegistrationCity;
-            worksheet.Cells["B21"].Value = student.AddressRegistrationStreet;
-            worksheet.Cells["F21"].Value = student.AddressRegistrationHouse;
-            worksheet.Cells["G21"].Value = student.AddressRegistrationHousingType;
-            worksheet.Cells["H21"].Value = student.AddressRegistrationHousing;
-            worksheet.Cells["J21"].Value = student.AddressRegistrationApartment;
+            worksheet.Cells["B19"].Value = student.AddressResidentialIndex;
+            worksheet.Cells["G19"].Value = student.AddressResidentialOblKrayAvtobl;
+            worksheet.Cells["B20"].Value = student.AddressResidentialDistrict;
+            worksheet.Cells["E20"].Value = student.AddressResidentialType;
+            worksheet.Cells["G20"].Value = student.AddressResidentialCity;
+            worksheet.Cells["B21"].Value = student.AddressResidentialStreet;
+            worksheet.Cells["F21"].Value = student.AddressResidentialHouse;
+            worksheet.Cells["G21"].Value = student.AddressResidentialHousingType;
+            worksheet.Cells["H21"].Value = student.AddressResidentialHousing;
+            worksheet.Cells["J21"].Value = student.AddressResidentialApartment;
             if (student.LivingInDormitory == true) worksheet.Cells["D22"].Value = "да";
             else worksheet.Cells["D22"].Value = "нет";
 
