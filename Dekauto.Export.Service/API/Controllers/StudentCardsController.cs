@@ -1,5 +1,6 @@
 ﻿using Dekauto.Export.Service.Domain.Entities;
 using Dekauto.Export.Service.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 
