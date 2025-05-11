@@ -8,6 +8,7 @@ namespace Dekauto.Export.Service.API.Controllers
 {
     [Route("api/studentcards")]
     [ApiController]
+    [Authorize]
     public class StudentCardsController : ControllerBase
     {
         private readonly IStudentsService studentsService;
