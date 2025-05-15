@@ -3,6 +3,7 @@ using Dekauto.Export.Service.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
+using Serilog;
 
 namespace Dekauto.Export.Service.API.Controllers
 {
@@ -13,10 +14,11 @@ namespace Dekauto.Export.Service.API.Controllers
     {
         private readonly IStudentsService studentsService;
         private string defaultLatFileName = "exported_student_card";
-
-        public StudentCardsController(IStudentsService studentsService) 
+        private readonly ILogger<StudentCardsController> logger;
+        public StudentCardsController(IStudentsService studentsService, ILogger<StudentCardsController> logger) 
         {
             this.studentsService = studentsService??throw new ArgumentNullException();
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         private void SetHeaderFileNames(string fileName, string fileNameStar)
@@ -39,6 +41,7 @@ namespace Dekauto.Export.Service.API.Controllers
         {
             try
             {
+                logger.LogInformation($"Начало экспорта студента: {student.Surname} {student.Name}");
                 var stream = await studentsService.ConvertStudentToExcel(student);
                 // INFO: данные в имени файла не должны содержать спецсимволы!
                 string fileName = $"{student.Surname} {student.Name} {student.Patronymic}";
@@ -49,6 +52,7 @@ namespace Dekauto.Export.Service.API.Controllers
             }
             catch (Exception ex) 
             {
+                logger.LogError(ex, $"Ошибка при экспорте студента {student.Surname} {student.Name}: {ex.Message}");
                 return HandleException(ex);
             }
         }
@@ -57,6 +61,7 @@ namespace Dekauto.Export.Service.API.Controllers
         {
             try
             {
+                logger.LogInformation($"Начало экспорта группы. Количество студентов: {students.Count}");
                 var stream = await studentsService.ConvertStudentsToExcel(students);
 
                 // INFO: данные в имени файла не должны содержать спецсимволы
@@ -66,6 +71,7 @@ namespace Dekauto.Export.Service.API.Controllers
             }
             catch (Exception ex) 
             {
+                logger.LogError(ex, $"Ошибка при групповом экспорте: {ex.Message}");
                 return HandleException(ex);
             }
         }
