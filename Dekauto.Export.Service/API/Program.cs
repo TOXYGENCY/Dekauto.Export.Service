@@ -1,6 +1,7 @@
 using System.Text;
 using Dekauto.Export.Service.Domain.Interfaces;
 using Dekauto.Export.Service.Domain.Services;
+using Dekauto.Export.Service.Domain.Services.Metric;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
@@ -68,6 +69,7 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 builder.Services.AddTransient<IStudentsService, StudentsService>();
+builder.Services.AddSingleton<IRequestMetricsService, RequestMetricsService>();
 
 // Аутентификация
 builder.Services
@@ -109,5 +111,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMetricsMiddleware(); // Метрики
 
 app.Run();
