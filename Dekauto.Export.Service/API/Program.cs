@@ -74,7 +74,7 @@ try
 
     if (Boolean.Parse(builder.Configuration["UseEndpointAuth"] ?? "true"))
     {
-        // Аутентификация
+        // Аутентификация (Проверка русского)
         builder.Services
         .AddAuthentication("Basic")
         .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(
