@@ -134,18 +134,18 @@ namespace Dekauto.Export.Service.Domain.Services
             else worksheet.Cells["D22"].Value = "нет";
 
             //Основания зачисления в МГППУ
-            worksheet.Cells["A34"].Value = student.EnrollementOrderNum;
-            worksheet.Cells["C34"].Value = student.EnrollementOrderDate;
+            worksheet.Cells["A34"].Value = student.EnrollementOrderDate;
+            worksheet.Cells["C34"].Value = student.EnrollementOrderNum;
 
             worksheet.Cells["B37"].Value = student.GiaExam1Name;
             worksheet.Cells["E37"].Value = student.GiaExam1Score;
-            worksheet.Cells["F37"].Value = student.GiaExam1Note;
+            if (student.GiaExam1Note != "") worksheet.Cells["F37"].Value = student.GiaExam1Note ?? "вступительные испытания в форме ЕГЭ";
             worksheet.Cells["B38"].Value = student.GiaExam2Name;
             worksheet.Cells["E38"].Value = student.GiaExam2Score;
-            worksheet.Cells["F38"].Value = student.GiaExam2Note;
+            if (student.GiaExam2Note != "") worksheet.Cells["F38"].Value = student.GiaExam2Note ?? "вступительные испытания в форме ЕГЭ";
             worksheet.Cells["B39"].Value = student.GiaExam3Name;
             worksheet.Cells["E39"].Value = student.GiaExam3Score;
-            worksheet.Cells["F39"].Value = student.GiaExam3Note;
+            if (student.GiaExam3Note != "") worksheet.Cells["F39"].Value = student.GiaExam3Note ?? "вступительные испытания в форме ЕГЭ";
 
             if (student.EducationReceived == "Среднее общее") worksheet.Cells["D40"].Value = "среднее общее образование";
             else if (student.EducationReceived == "Высшее образование") worksheet.Cells["D40"].Value = "высшее образование";
