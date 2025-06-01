@@ -111,11 +111,11 @@ namespace Dekauto.Export.Service.Domain.Services
             worksheet.Cells["B15"].Value = student.AddressRegistrationIndex;
             worksheet.Cells["G15"].Value = student.AddressRegistrationOblKrayAvtobl;
             worksheet.Cells["B16"].Value = student.AddressRegistrationDistrict;
-            worksheet.Cells["E16"].Value = student.AddressRegistrationType;
+            if ((student.AddressRegistrationType != "") && (student.AddressRegistrationType != null)) worksheet.Cells["E16"].Value = $"{student.AddressRegistrationType}:";
             worksheet.Cells["G16"].Value = student.AddressRegistrationCity;
             worksheet.Cells["B17"].Value = student.AddressRegistrationStreet;
             worksheet.Cells["F17"].Value = student.AddressRegistrationHouse;
-            worksheet.Cells["G17"].Value = student.AddressRegistrationHousingType;
+            if ((student.AddressRegistrationHousingType != "") && (student.AddressRegistrationHousingType != null)) worksheet.Cells["G17"].Value = $"{student.AddressRegistrationHousingType}:";
             worksheet.Cells["H17"].Value = student.AddressRegistrationHousing;
             worksheet.Cells["J17"].Value = student.AddressRegistrationApartment;
 
@@ -123,11 +123,11 @@ namespace Dekauto.Export.Service.Domain.Services
             worksheet.Cells["B19"].Value = student.AddressResidentialIndex;
             worksheet.Cells["G19"].Value = student.AddressResidentialOblKrayAvtobl;
             worksheet.Cells["B20"].Value = student.AddressResidentialDistrict;
-            worksheet.Cells["E20"].Value = student.AddressResidentialType;
+            if ((student.AddressResidentialType != "") && (student.AddressResidentialType != null)) worksheet.Cells["E20"].Value = $"{student.AddressResidentialType}:";
             worksheet.Cells["G20"].Value = student.AddressResidentialCity;
             worksheet.Cells["B21"].Value = student.AddressResidentialStreet;
             worksheet.Cells["F21"].Value = student.AddressResidentialHouse;
-            worksheet.Cells["G21"].Value = student.AddressResidentialHousingType;
+            if ((student.AddressResidentialHousingType != "") && (student.AddressResidentialHousingType != null)) worksheet.Cells["G21"].Value = $"{student.AddressResidentialHousingType}:";
             worksheet.Cells["H21"].Value = student.AddressResidentialHousing;
             worksheet.Cells["J21"].Value = student.AddressResidentialApartment;
             if (student.LivingInDormitory == true) worksheet.Cells["D22"].Value = "да";
