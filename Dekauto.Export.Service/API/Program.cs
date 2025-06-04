@@ -1,4 +1,4 @@
-using System.Text;
+п»їusing System.Text;
 using Dekauto.Export.Service.Domain.Interfaces;
 using Dekauto.Export.Service.Domain.Services;
 using Dekauto.Export.Service.Domain.Services.Metric;
@@ -74,14 +74,14 @@ try
 
     if (Boolean.Parse(builder.Configuration["UseEndpointAuth"] ?? "true"))
     {
-        // Аутентификация
+        // РђСѓС‚РµРЅС‚РёС„РёРєР°С†РёСЏ (РџСЂРѕРІРµСЂРєР° СЂСѓСЃСЃРєРѕРіРѕ)
         builder.Services
         .AddAuthentication("Basic")
         .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(
             "Basic",
             options => { });
 
-        // Авторизация
+        // РђРІС‚РѕСЂРёР·Р°С†РёСЏ
         builder.Services.AddAuthorization(options =>
         {
             options.DefaultPolicy = new AuthorizationPolicyBuilder("Basic")
@@ -91,10 +91,10 @@ try
     }
     else
     {
-        // Заглушка политик доступа, если авторизация выключена
+        // Р—Р°РіР»СѓС€РєР° РїРѕР»РёС‚РёРє РґРѕСЃС‚СѓРїР°, РµСЃР»Рё Р°РІС‚РѕСЂРёР·Р°С†РёСЏ РІС‹РєР»СЋС‡РµРЅР°
         builder.Services.AddAuthorizationBuilder()
         .SetDefaultPolicy(new AuthorizationPolicyBuilder()
-        .RequireAssertion(_ => true) // Всегда разрешаем доступ
+        .RequireAssertion(_ => true) // Р’СЃРµРіРґР° СЂР°Р·СЂРµС€Р°РµРј РґРѕСЃС‚СѓРї
         .Build());
     }
 
@@ -102,7 +102,7 @@ try
 
     // Configure the HTTP request pipeline.
 
-    // Явно указываем порты (для Docker)
+    // РЇРІРЅРѕ СѓРєР°Р·С‹РІР°РµРј РїРѕСЂС‚С‹ (РґР»СЏ Docker)
     app.Urls.Add("http://*:5505");
 
     if (app.Environment.IsDevelopment())
@@ -112,7 +112,7 @@ try
         app.UseSwaggerUI();
     }
 
-    // Включаем https, если указано в конфиге
+    // Р’РєР»СЋС‡Р°РµРј https, РµСЃР»Рё СѓРєР°Р·Р°РЅРѕ РІ РєРѕРЅС„РёРіРµ
     if (Boolean.Parse(app.Configuration["UseHttps"] ?? "false"))
     {
         app.Urls.Add("https://*:5506");
@@ -126,10 +126,10 @@ try
 
     if (Boolean.Parse(app.Configuration["UseEndpointAuth"] ?? "true"))
     {
-        // Аутентификация (JWT)
+        // РђСѓС‚РµРЅС‚РёС„РёРєР°С†РёСЏ (JWT)
         app.UseAuthentication();
 
-        // Авторизация (защита контроллеров через [Authorize])
+        // РђРІС‚РѕСЂРёР·Р°С†РёСЏ (Р·Р°С‰РёС‚Р° РєРѕРЅС‚СЂРѕР»Р»РµСЂРѕРІ С‡РµСЂРµР· [Authorize])
         app.UseAuthorization();
     }
     else
@@ -139,7 +139,7 @@ try
 
     app.MapControllers();
 
-    app.UseMetricsMiddleware(); // Метрики
+    app.UseMetricsMiddleware(); // РњРµС‚СЂРёРєРё
 
     Log.Information("Application startup...");
     app.Run();

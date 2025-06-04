@@ -35,6 +35,9 @@
 #*.sqlproj   merge=binary
 #*.wwaproj   merge=binary
 
+*.cs text working-tree-encoding=UTF-8
+*.txt text working-tree-encoding=UTF-8
+*.json text working-tree-encoding=UTF-8
 ###############################################################################
 # behavior for image files
 #

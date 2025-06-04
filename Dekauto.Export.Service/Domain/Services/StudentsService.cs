@@ -111,11 +111,11 @@ namespace Dekauto.Export.Service.Domain.Services
             worksheet.Cells["B15"].Value = student.AddressRegistrationIndex;
             worksheet.Cells["G15"].Value = student.AddressRegistrationOblKrayAvtobl;
             worksheet.Cells["B16"].Value = student.AddressRegistrationDistrict;
-            worksheet.Cells["E16"].Value = student.AddressRegistrationType;
+            if ((student.AddressRegistrationType != "") && (student.AddressRegistrationType != null)) worksheet.Cells["E16"].Value = $"{student.AddressRegistrationType}:";
             worksheet.Cells["G16"].Value = student.AddressRegistrationCity;
             worksheet.Cells["B17"].Value = student.AddressRegistrationStreet;
             worksheet.Cells["F17"].Value = student.AddressRegistrationHouse;
-            worksheet.Cells["G17"].Value = student.AddressRegistrationHousingType;
+            if ((student.AddressRegistrationHousingType != "") && (student.AddressRegistrationHousingType != null)) worksheet.Cells["G17"].Value = $"{student.AddressRegistrationHousingType}:";
             worksheet.Cells["H17"].Value = student.AddressRegistrationHousing;
             worksheet.Cells["J17"].Value = student.AddressRegistrationApartment;
 
@@ -123,29 +123,29 @@ namespace Dekauto.Export.Service.Domain.Services
             worksheet.Cells["B19"].Value = student.AddressResidentialIndex;
             worksheet.Cells["G19"].Value = student.AddressResidentialOblKrayAvtobl;
             worksheet.Cells["B20"].Value = student.AddressResidentialDistrict;
-            worksheet.Cells["E20"].Value = student.AddressResidentialType;
+            if ((student.AddressResidentialType != "") && (student.AddressResidentialType != null)) worksheet.Cells["E20"].Value = $"{student.AddressResidentialType}:";
             worksheet.Cells["G20"].Value = student.AddressResidentialCity;
             worksheet.Cells["B21"].Value = student.AddressResidentialStreet;
             worksheet.Cells["F21"].Value = student.AddressResidentialHouse;
-            worksheet.Cells["G21"].Value = student.AddressResidentialHousingType;
+            if ((student.AddressResidentialHousingType != "") && (student.AddressResidentialHousingType != null)) worksheet.Cells["G21"].Value = $"{student.AddressResidentialHousingType}:";
             worksheet.Cells["H21"].Value = student.AddressResidentialHousing;
             worksheet.Cells["J21"].Value = student.AddressResidentialApartment;
             if (student.LivingInDormitory == true) worksheet.Cells["D22"].Value = "да";
             else worksheet.Cells["D22"].Value = "нет";
 
             //Основания зачисления в МГППУ
-            worksheet.Cells["A34"].Value = student.EnrollementOrderNum;
-            worksheet.Cells["C34"].Value = student.EnrollementOrderDate;
+            worksheet.Cells["A34"].Value = student.EnrollementOrderDate;
+            worksheet.Cells["C34"].Value = student.EnrollementOrderNum;
 
             worksheet.Cells["B37"].Value = student.GiaExam1Name;
             worksheet.Cells["E37"].Value = student.GiaExam1Score;
-            worksheet.Cells["F37"].Value = student.GiaExam1Note;
+            if (student.GiaExam1Note != "") worksheet.Cells["F37"].Value = student.GiaExam1Note ?? "вступительные испытания в форме ЕГЭ";
             worksheet.Cells["B38"].Value = student.GiaExam2Name;
             worksheet.Cells["E38"].Value = student.GiaExam2Score;
-            worksheet.Cells["F38"].Value = student.GiaExam2Note;
+            if (student.GiaExam2Note != "") worksheet.Cells["F38"].Value = student.GiaExam2Note ?? "вступительные испытания в форме ЕГЭ";
             worksheet.Cells["B39"].Value = student.GiaExam3Name;
             worksheet.Cells["E39"].Value = student.GiaExam3Score;
-            worksheet.Cells["F39"].Value = student.GiaExam3Note;
+            if (student.GiaExam3Note != "") worksheet.Cells["F39"].Value = student.GiaExam3Note ?? "вступительные испытания в форме ЕГЭ";
 
             if (student.EducationReceived == "Среднее общее") worksheet.Cells["D40"].Value = "среднее общее образование";
             else if (student.EducationReceived == "Высшее образование") worksheet.Cells["D40"].Value = "высшее образование";
