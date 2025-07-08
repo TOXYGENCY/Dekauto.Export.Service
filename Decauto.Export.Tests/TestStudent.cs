@@ -39,7 +39,7 @@ namespace Dekauto.Export.Tests
             };
 
             //Act
-            var result = await _controller.ExportStudent(student);
+            var result = await _controller.ExportStudentAsync(student);
 
             //Assert
             Assert.IsNotNull(result);
@@ -67,7 +67,7 @@ namespace Dekauto.Export.Tests
             _studentsService.Setup(s => s.ConvertStudentToExcel(It.IsAny<Student>())).Throws(new ArgumentNullException());
 
             //Act
-            var result = await _controller.ExportStudent(student);
+            var result = await _controller.ExportStudentAsync(student);
 
             //Assert
             Assert.IsNotNull(result);
@@ -90,7 +90,7 @@ namespace Dekauto.Export.Tests
             _studentsService.Setup(s => s.ConvertStudentToExcel(It.IsAny<Student>())).Throws(new FileNotFoundException());
 
             //Act
-            var result = await _controller.ExportStudent(student);
+            var result = await _controller.ExportStudentAsync(student);
 
             //Assert
             Assert.IsNotNull(result);
@@ -113,7 +113,7 @@ namespace Dekauto.Export.Tests
             _studentsService.Setup(s => s.ConvertStudentToExcel(It.IsAny<Student>())).Throws(new InvalidOperationException());
 
             //Act
-            var result = await _controller.ExportStudent(student);
+            var result = await _controller.ExportStudentAsync(student);
 
             //Assert
             Assert.IsNotNull(result);
@@ -136,7 +136,7 @@ namespace Dekauto.Export.Tests
             _studentsService.Setup(s => s.ConvertStudentToExcel(It.IsAny<Student>())).Throws(new Exception());
 
             //Act
-            var result = await _controller.ExportStudent(student);
+            var result = await _controller.ExportStudentAsync(student);
 
             //Assert
             Assert.IsNotNull(result);
