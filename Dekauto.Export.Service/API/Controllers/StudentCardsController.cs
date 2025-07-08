@@ -37,7 +37,7 @@ namespace Dekauto.Export.Service.API.Controllers
         }
 
         [HttpPost("student")]
-        public async Task<IActionResult> ExportStudent([FromBody] Student student) 
+        public async Task<IActionResult> ExportStudentAsync([FromBody] Student student) 
         {
             try
             {
@@ -57,7 +57,7 @@ namespace Dekauto.Export.Service.API.Controllers
             }
         }
         [HttpPost("students")]
-        public async Task<IActionResult> ExportStudents([FromBody] List<Student> students)
+        public async Task<IActionResult> ExportStudentsAsync([FromBody] List<Student> students)
         {
             try
             {

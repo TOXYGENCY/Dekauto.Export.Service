@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Dekauto.Export.Service.API.Controllers
 {
+    [Route("api/metrics")]
+    [ApiController]
     public class MetricsController : ControllerBase
     {
         private readonly IRequestMetricsService requestMetricsService;
@@ -12,7 +14,8 @@ namespace Dekauto.Export.Service.API.Controllers
         {
             this.requestMetricsService = requestMetricsService;
         }
-        [Route("healthcheck")]
+
+        [Route("/healthcheck")]
         [HttpGet]
         public async Task<IActionResult> HealthCheckAsync()
         {
@@ -26,10 +29,10 @@ namespace Dekauto.Export.Service.API.Controllers
             }
         }
 
-        [Route("requests")]
+        [Route("/requests")]
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> RequestsPerPeriod()
+        public async Task<IActionResult> RequestsPerPeriodAsync()
         {
             try
             {
